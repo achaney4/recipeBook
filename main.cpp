@@ -24,7 +24,7 @@ int main(){
                 rb.displayRecipes(recipes);
                 break;
             case 3:
-                end;
+                break;
             default:
                 cout << "Invalid choice!" << endl;
         }
