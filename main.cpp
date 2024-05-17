@@ -12,9 +12,11 @@ int main(){
 
     do{
         cout << "Please enter your choice!" << endl;
-        cout << "1. Add Recipe" << endl;
+        cout << "1. Add a recipe" << endl;
         cout << "2. Display Recipe Book" << endl;
-        cout << "3. Exit" << endl;
+        cout << "3. Delete a recipe" << endl;
+        cout << "4. Search a recipe" << endl;
+        cout << "5. Exit" << endl;
         cin >> choice;
 
         switch(choice){
@@ -24,16 +26,19 @@ int main(){
                 rb.displayRecipes(recipes);
                 break;
             case 3:
+                rb.deleteRecipe(recipes);
+                break;
+            case 4:
+                rb.searchRecipe(recipes);
+            case 5:
                 break;
             default:
                 cout << "Invalid choice!" << endl;
         }
 
-    } while (choice != 3);
+    } while (choice != 5);
 
     
-    
-
     //recipes.clear();
 
 

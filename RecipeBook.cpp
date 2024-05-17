@@ -1,9 +1,11 @@
 #include "RecipeBook.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 
-void RecipeBook::addRecipe(vector<RecipeBook> &book) {
+void RecipeBook::addRecipe(vector<RecipeBook> &recipes) {
     RecipeBook newRecipe;
     int n;
     string items;
@@ -29,13 +31,68 @@ void RecipeBook::addRecipe(vector<RecipeBook> &book) {
     
     cout << "Lastly, enter how long this recipe will take to make (minutes)" << endl;
     cin >> newRecipe.timeSpent;
-    book.push_back(newRecipe);
+    recipes.push_back(newRecipe);
     cout << "Recipe added!" << endl;
+    cout << endl;
 
 }
 
-void RecipeBook::displayRecipes(const vector<RecipeBook> &book){
-   for (const auto &recipe : book){
+void RecipeBook::deleteRecipe(vector<RecipeBook> &recipes){
+    string nameToDelete;
+    cout << "Enter the recipe name you'd like to delete!" << endl;
+    cin >> nameToDelete;
+
+    auto it = remove_if(recipes.begin(), recipes.end(), [&](const RecipeBook &recipes)
+        { return recipes.name == nameToDelete;});
+
+        if( it != recipes.end()){
+            recipes.erase(it, recipes.end());
+            cout << "Recipe deleted!" << endl;
+        }
+        else{
+            cout << "Recipe not found." << endl;
+        }
+
+        cout << endl;
+}
+
+void RecipeBook::searchRecipe(vector<RecipeBook> &recipes){
+    string searchName;
+    cout << "Enter a recipe name to search: " << endl;
+    cin >> searchName;
+
+    bool found = false;
+
+    for (const auto &recipe : recipes){
+        
+        if(recipe.name == searchName){
+            cout << "**Recipe Name: " << recipe.name  << " **" << endl;
+
+            cout << "Ingredients:" << endl;
+            for(int i=0; i<recipe.ingredients.size(); i++){
+                cout << i << ". " << recipe.ingredients[i] << endl;
+            }
+
+            cout << "Instructions: " << endl;
+            for(int i=0; i<recipe.instructions.size(); i++){
+                cout << recipe.instructions[i] << " ";
+            }
+            cout << endl;
+            cout << "Time spent: " << recipe.timeSpent << " minutes" << endl;
+            found = true;
+            break;
+        }
+    }
+
+    if(!found){
+        cout << "Recipe not found." << endl;
+    }
+
+    cout << endl;
+}
+
+void RecipeBook::displayRecipes(const vector<RecipeBook> &recipes){
+   for (const auto &recipe : recipes){
         cout << "**Recipe Name: " << recipe.name  << " **" << endl;
 
         cout << "Ingredients:" << endl;
@@ -51,6 +108,6 @@ void RecipeBook::displayRecipes(const vector<RecipeBook> &book){
         cout << "Time spent: " << recipe.timeSpent << " minutes" << endl;
         cout << endl;
     
-}
+    }
 
 }

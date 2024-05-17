@@ -11,8 +11,10 @@ class RecipeBook{
 
     public:
 
-    void addRecipe(vector<RecipeBook> &book);
-    void displayRecipes(const vector<RecipeBook> &book);
+    void addRecipe(vector<RecipeBook> &recipes);
+    void displayRecipes(const vector<RecipeBook> &recipes);
+    void deleteRecipe(vector<RecipeBook> &recipes);
+    void searchRecipe(vector<RecipeBook> &recipes);
 
     string name;
     vector<string> ingredients;
